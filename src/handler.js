@@ -8,15 +8,6 @@ const addBook = (request, h) => {
   const updatedAt = insertedAt;
   const finished = readPage === pageCount;
 
-  const newBook = {
-    name, year, author, summary, publisher, pageCount, readPage, reading, id, insertedAt, updatedAt, finished
-  };
-
-  books.push(newBook);
-
-  const isSuccess = books.filter((book) => book.id === id).length > 0;
-
-
   if (!name) {
     const response = h.response({
       status: 'fail',
@@ -35,6 +26,14 @@ const addBook = (request, h) => {
     return response;
   }
 
+  const newBook = {
+    name, year, author, summary, publisher, pageCount, readPage, reading, id, insertedAt, updatedAt, finished
+  };
+
+  books.push(newBook);
+
+  const isSuccess = books.filter((book) => book.id === id).length > 0;
+
   if (isSuccess) {
     const response = h.response({
       status: 'success',
@@ -46,13 +45,6 @@ const addBook = (request, h) => {
     response.code(201);
     return response;
   }
-
-  const response = h.response({
-    status: 'fail',
-    message: 'Buku gagal ditambahkan',
-  });
-  response.code(500);
-  return response;
 };
 
 const getAllBooks = (request, h) => {

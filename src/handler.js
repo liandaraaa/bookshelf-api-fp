@@ -18,10 +18,9 @@ const addBook = (request, h) => {
 
 
   if (!name) {
-    console.log('cek err name req', name);
     const response = h.response({
       status: 'fail',
-      message: 'Gagal menambahkan Buku. Mohon isi nama buku',
+      message: 'Gagal menambahkan buku. Mohon isi nama buku',
     });
     response.code(400);
     return response;
@@ -30,7 +29,7 @@ const addBook = (request, h) => {
   if (readPage > pageCount) {
     const response = h.response({
       status: 'fail',
-      message: 'Gagal menambahkan Buku. readPage tidak boleh lebih besar dari pageCount',
+      message: 'Gagal menambahkan buku. readPage tidak boleh lebih besar dari pageCount',
     });
     response.code(400);
     return response;
@@ -57,17 +56,10 @@ const addBook = (request, h) => {
 };
 
 const getAllBooks = (request, h) => {
-  const { name } = request.query;
-  let filteredBooks = books;
-
-  if (name) {
-    filteredBooks = books.filter((book) => book.name.toLowerCase().includes(name.toLowerCase()));
-  }
-
   const response = h.response({
     status: 'success',
     data: {
-      books: filteredBooks.map((book) => ({
+      books: books.map((book) => ({
         id: book.id,
         name: book.name,
         publisher: book.publisher,
@@ -111,7 +103,7 @@ const editBookById = (request, h) => {
     if (!name) {
       const response = h.response({
         status: 'fail',
-        message: 'Gagal memperbarui Buku. Mohon isi nama buku',
+        message: 'Gagal memperbarui buku. Mohon isi nama buku',
       });
       response.code(400);
       return response;
@@ -120,7 +112,7 @@ const editBookById = (request, h) => {
     if (readPage > pageCount) {
       const response = h.response({
         status: 'fail',
-        message: 'Gagal memperbarui Buku. readPage tidak boleh lebih besar dari pageCount',
+        message: 'Gagal memperbarui buku. readPage tidak boleh lebih besar dari pageCount',
       });
       response.code(400);
       return response;
@@ -150,7 +142,7 @@ const editBookById = (request, h) => {
 
   const response = h.response({
     status: 'fail',
-    message: 'Gagal memperbarui Buku. Id tidak ditemukan',
+    message: 'Gagal memperbarui buku. Id tidak ditemukan',
   });
   response.code(404);
   return response;
